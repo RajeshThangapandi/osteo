@@ -329,16 +329,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoCards = document.querySelectorAll('.video-card');
 
     if (videoModal && videoCards.length > 0) {
-        
+
         // Open Modal
         videoCards.forEach(card => {
-            card.addEventListener('click', function(e) {
+            card.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 // Get URL from href
                 const url = this.getAttribute('href');
                 let videoId = '';
-                
+
                 // Extract ID from youtube.com/watch?v=ID
                 if (url.includes('youtube.com/watch?v=')) {
                     videoId = url.split('v=')[1];
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (ampersandPos !== -1) {
                         videoId = videoId.substring(0, ampersandPos);
                     }
-                } 
+                }
                 // Extract ID from youtu.be/ID
                 else if (url.includes('youtu.be/')) {
                     videoId = url.split('youtu.be/')[1];
@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (videoId) {
                     videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-                    
+
                     // Show modal
                     videoModal.style.display = 'flex';
                     // Trigger reflow
@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close events
         closeBtn.addEventListener('click', closeModal);
-        
+
         videoModal.addEventListener('click', (e) => {
             if (e.target === videoModal) {
                 closeModal();
@@ -401,10 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalOverlay = modal.querySelector('.modal-overlay');
     const closeBtn = modal.querySelector('.modal-close');
     const consultationForm = document.getElementById('consultationForm');
-    
+
     // Get all CTA buttons (Book Appointment, Book Consultation, etc.)
     const ctaButtons = document.querySelectorAll('a[href="#book-now"], .btn-primary, .cta-button, a[href*="book"]');
-    
+
     // Open modal function
     function openModal(e) {
         // Check if it's a link that should open modal
@@ -415,48 +415,60 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
     }
-    
+
     // Close modal function
     function closeModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
         consultationForm.reset();
     }
-    
+
     // Attach click handlers to all CTA buttons
     ctaButtons.forEach(button => {
         button.addEventListener('click', openModal);
     });
-    
+
     // Close modal on close button click
     closeBtn.addEventListener('click', closeModal);
-    
+
     // Close modal on overlay click
     modalOverlay.addEventListener('click', closeModal);
-    
+
     // Close modal on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();
         }
     });
-    
+
     // Handle form submission
     consultationForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData(consultationForm);
         const data = Object.fromEntries(formData);
-        
+
         console.log('Form submitted:', data);
-        
+
         // Show success message
         alert('Thank you! We will contact you shortly.');
-        
+
         // Close modal
         closeModal();
-        
+
         // Here you can add actual form submission logic
         // e.g., send to your backend API
     });
+
+    // ===========================
+    // AUTO-OPEN MODAL EVERY 5 SECONDS
+    // ===========================
+    setInterval(() => {
+        // Only open if modal is not already open
+        if (!modal.classList.contains('active')) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            console.log('Auto-opened consultation modal');
+        }
+    }, 5000); // 5 seconds = 5000 milliseconds
 });
