@@ -1381,12 +1381,23 @@ body {
     gap: var(--spacing-lg);
     margin-top: var(--spacing-xl);
     align-items: start;
-    /* Center the Shorts in their grid cells */
+}
+
+/* Center the last video when it's alone in the row */
+.video-center-last {
+    grid-column: 1 / -1;
+    justify-self: center;
 }
 
 @media (max-width: 768px) {
     .stories-video-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Reset centering on mobile */
+    .video-center-last {
+        grid-column: auto;
+        justify-self: auto;
     }
 }
 
@@ -1767,7 +1778,8 @@ body {
     .symptoms-grid,
     .doctors-grid,
     .stories-grid,
-    .faq-wrapper {
+    .faq-wrapper,
+    .video-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1805,6 +1817,13 @@ body {
     .floating-btn {
         width: 50px;
         height: 50px;
+    }
+
+    /* Make Shorts wider on mobile for better viewing */
+    .video-embed-short {
+        max-width: 100%;
+        padding-bottom: 56.25%;
+        /* 16:9 aspect ratio on mobile */
     }
 
     .floating-btn svg {
