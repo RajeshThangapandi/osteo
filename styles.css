@@ -1313,9 +1313,12 @@ body {
 
 .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    /* Fixed 2 columns - each takes 50% */
     gap: var(--spacing-lg);
     margin-top: var(--spacing-xl);
+    align-items: start;
+    /* Align all items to top */
 }
 
 .video-card {
@@ -1369,6 +1372,74 @@ body {
     color: var(--text-secondary);
     line-height: 1.5;
     margin: 0;
+}
+
+/* Stories Video Grid - 2 columns on desktop, 1 on mobile */
+.stories-video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+    .stories-video-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* YouTube Shorts - Vertical aspect ratio */
+.video-embed-short {
+    position: relative;
+    width: 100%;
+    padding-bottom: 80%;
+    /* Reduced from 120% - even shorter */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: #000;
+    max-width: 250px;
+    /* Reduced from 300px */
+    margin: 0 auto;
+}
+
+.video-embed-short iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Video card for Shorts - centered and aligned to top */
+.video-card-short {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-base);
+    border: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Align to top instead of center */
+}
+
+.video-card-short:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Force video to start on new row */
+.video-new-row {
+    grid-column: 1 / -1;
+    /* Span all columns */
+}
+
+/* Full width video - spans all columns */
+.video-full-width {
+    grid-column: 1 / -1;
+    /* Span all columns */
 }
 
 /* ===========================
