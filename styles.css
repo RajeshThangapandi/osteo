@@ -1380,6 +1380,8 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-lg);
     margin-top: var(--spacing-xl);
+    align-items: start;
+    /* Center the Shorts in their grid cells */
 }
 
 @media (max-width: 768px) {
@@ -1392,14 +1394,14 @@ body {
 .video-embed-short {
     position: relative;
     width: 100%;
-    padding-bottom: 80%;
-    /* Reduced from 120% - even shorter */
+    padding-bottom: 50%;
+    /* Reduced from 80% - much shorter */
     height: 0;
     overflow: hidden;
     border-radius: var(--radius-md);
     background: #000;
-    max-width: 250px;
-    /* Reduced from 300px */
+    max-width: 350px;
+    /* Increased from 250px - wider */
     margin: 0 auto;
 }
 
